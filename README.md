@@ -1,5 +1,5 @@
 # Rescue Of The Princess Lilliana
-A dungeon crawler game made for the GitHub Game Off Jam 2022 under the theme "cliché" with the chose phrase "A knight in shining armor"
+A dungeon crawler game made for the GitHub Game Off Jam 2022 under the theme "cliché" with the chosen phrase "A knight in shining armor"
 
 ## About
 The princess has been kidnapped by an evil villain who wants to take over the land! The king has sent you, the trusted knight, to bring her back!
