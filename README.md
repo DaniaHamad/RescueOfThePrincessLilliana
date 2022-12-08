@@ -8,4 +8,4 @@ You will make your way through hardships whether it's a monster you have encount
 
 ### Dev. notes
 I couldn't finish the game on time, but I will continue developing it until it's 100% finished.
-Will continue developing on a separate branch, the jam game will be in the "jam" branch and will not be updated.
+Will continue developing on the main branch, the jam game will be in the "jam" branch and will not be updated.
