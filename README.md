@@ -4,7 +4,11 @@ A dungeon crawler game made for the GitHub Game Off Jam 2022 under the theme "cl
 ## About
 The princess has been kidnapped by an evil villain who wants to take over the land! The king has sent you, the trusted knight, to bring her back!
 
-You will make your way through hardships whether it's a monster you have encountered in the woods or a giant dragon the blocks your way to the castle!
+You will make your way through hardships whether it's a monster you have encountered in the woods or a giant dragon that blocks your way to the castle!
+
+## Play
+password: lilliana
+https://dania-code.itch.io/rescue-of-the-princess-lilliana
 
 ### Dev. notes
 I couldn't finish the game on time, but I will continue developing it until it's 100% finished.
