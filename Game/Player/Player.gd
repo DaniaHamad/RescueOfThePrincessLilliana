@@ -1,10 +1,10 @@
 extends KinematicBody2D
 
-export var  ACCELERATION= 1140
-export var  MOVE_SPEED = 300
-export var  FRICTION = 1140
-export var DASH_SPEED = 900
-export var DASH_DURATION = 0.2
+export var  ACCELERATION= 1340
+export var  MOVE_SPEED = 500
+export var  FRICTION = 1340
+export var DASH_SPEED = 1350
+export var DASH_DURATION = 0.4
 
 enum{
 	MOVE,
@@ -20,6 +20,9 @@ onready var animation_player =$AnimationPlayer
 onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 onready var dash = $Dash
+onready var sprite = $Sprite
+onready var blink_animation_player = $BlinkAnimationPlayer
+onready var hurtbox = $HurtBox
 
 func _ready():
 	animation_tree.active =true
@@ -33,7 +36,6 @@ func _physics_process(delta):
 			attack_state()
 		DASH:
 			dash_state()
-
 
 func move_state(delta):
 	var input_vector=Vector2.ZERO
@@ -50,8 +52,8 @@ func move_state(delta):
 		velocity=velocity.move_toward(input_vector*MOVE_SPEED,ACCELERATION*delta)
 	else:
 		animation_state.travel("Idle")
-		velocity=velocity.move_toward(Vector2.ZERO,ACCELERATION*delta)
-
+		velocity=Vector2.ZERO
+	
 	move()
 	
 
@@ -59,21 +61,42 @@ func move_state(delta):
 		animation_state.travel("Attack")
 		state=ATTACK
 	
-	if Input.is_action_just_pressed("dash")&&dash.can_dash &&!dash.is_dashing():
+	if Input.is_action_just_pressed("dash")&&dash.can_dash &&!dash.is_dashing()&&input_vector!=Vector2.ZERO:
+		dash.start_dash(sprite,DASH_DURATION)
 		state=DASH
 
 func attack_state():
+	print("attack started")
 	velocity=Vector2.ZERO
 
 func dash_state():
-	dash.start_dash(DASH_DURATION)
 	velocity = dash_vector * DASH_SPEED
-	state=MOVE
+	move()
+
 
 func move():
 	velocity = move_and_slide(velocity)	
-var count=0
+
 func attack_animation_finished():
-	count+=1
-	print("function called "+str(count))
 	state=MOVE
+
+
+func _on_HurtBox_area_entered(area):
+	hurtbox.start_invincibility(0.6)
+
+func _on_HurtBox_invinciblility_started():
+	blink_animation_player.play("Blink")
+
+func _on_HurtBox_invinciblility_ended():
+	blink_animation_player.play("Stop")
+
+
+func _on_Dash_dash_invinciblility_started():
+	hurtbox.shut_the_hurt_box()
+
+
+func _on_Dash_dash_invinciblility_ended():
+	hurtbox.turn_the_hurt_box()
+	velocity = velocity *0.8
+	state=MOVE
+	print("dash ended")

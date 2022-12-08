@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Enemies/IceCream.tscn" type="PackedScene" id=2]
+
+[node name="TestingZone" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 868, 461 )
+current = true
+smoothing_enabled = true
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 868, 461 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="IceCream" parent="." instance=ExtResource( 2 )]
+position = Vector2( 292, 638 )
